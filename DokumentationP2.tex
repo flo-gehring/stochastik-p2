@@ -1,0 +1,207 @@
+\documentclass[a4paper, 10pt]{article}
+
+\pagenumbering{arabic}  
+
+%   *****************************************************************************************
+% Usepackages
+\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}					% Ermoeglicht die direkte EIngabe von Umlauten
+\setlength{\parskip}{5pt}
+\parindent 0pt
+\usepackage{hyperref}							% Erzeugt Links im Inhaltsverzeichnis. Der Rahmen ist im Druck nicht sichtbar
+\usepackage[ngerman]{babel}					% Wichtig fuer Anfuerungszeichen
+\usepackage{fancyhdr}					% Fuer Kopfzeile 
+\usepackage{tikz}									% Maechtiges Zeichenpaket fuer Baume ect.
+\usepackage{color}									% Fuer farbige Schrift z.B. bei Anmerkungen
+\usepackage{placeins}								% Wichtig fuer den Befehl \FloatBarrier
+\usepackage[pointedenum]{paralist}		% Aufzaehlung mit \begin{compactenum}[a)]
+\usepackage{graphicx}
+\usepackage[a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+%\usepackage{lineno}								% Paket fuer Zeilennummern, falls benoetigt
+%\usepackage{eurosym}							% Ermoeglicht das Einfuegen eines Eurosymbols
+\usepackage{tikz-qtree}							% Ableitungsbaume etwas komplizierter
+\usepackage{caption}								% Bildunterschriften
+\usepackage{booktabs} % Toprule, Bottomrule einer Tabelle
+%\usepackage{rotating}							% Rotieren von Grafiken, Textboxen ect.
+\usepackage[numbers]{natbib}				
+\usepackage{setspace}							% Zum Einstellen der Seitenabstaende
+%\usepackage{booktabs}						% Packet fuer elegante, wissenschaftl. Arbeiten
+\usepackage{array}								% Moeglichkeit der Spaltenformatierung in Tabellen
+%\usepackage{wrapfig}							% Fuer Textumflossene Tabellen
+\usepackage{graphics}							% Bilder einbinden
+\usepackage{subfig}								% Einbinden von Untergrafiken (z.B. \subfloat)
+\usepackage{floatflt}							% Textumflossene Graphiken
+\usepackage{multirow}						% mehrere Zeilen einer Tabelle zusammenfassen
+\usepackage{amsmath}							% Maechtiges Paket fuer Mathe
+\usepackage{amssymb}							% Maechtiges Paket fuer Mathe
+\usepackage{siunitx}								% Paket fuer Einheiten
+\usepackage{listings}							% Quellcode
+%\usepackage{natbib}							% Paket fuer BibTeX
+\usepackage{calc}									% Paket fuer \widthof-Befehl
+%\usepackage{pdflscape}						% Einfuegen von Seiten im Querformat 
+\usepackage{stmaryrd}							% Fuer den Blitz bei Widerspruechen
+\usetikzlibrary{arrows, automata}			% Zustandsuebergaenge beim Zeichnen von endl. Automaten
+\usepackage{color}
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+\usepackage{listings}
+\lstset{language=R,
+	showspaces=false,
+	showtabs=false,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{pgrey},
+	rulecolor=\color{black},
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	commentstyle=\color{pgreen},
+	keywordstyle=\color{pblue},
+%	stringstyle=\color{pred},
+	basicstyle=\footnotesize\tt
+}
+%\usepackage[lined,boxed,commentsnumbered]{algorithm2e}%für Pseudocode
+%\usepackage{xpatch}%Wird fuer algorithm2e benoetigt, da es die kaesten fuer
+%die algo-boxen in itemize umgebungen nicht richtig setzt ( overfull hbox)
+
+%Setzt algorithm auch in enumerate und itemize richtig (keine overfull hbox)
+%\xpretocmd{\algorithm}{\hsize=\linewidth}{}{}
+
+%\usepackage{algorithm}				% für Pseudocode
+%£\usepackage[noend]{algpseudocode}	% für Pseudocode
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e} 
+ \usepackage{blindtext}
+  	 \usepackage{lipsum} % für filler text
+\usepackage[utf8]{inputenc}
+
+\pagestyle{fancy}
+\fancyhf{}\fancyhead[L]{Stochastik \\ Programmieraufgabe 2}  
+\fancyhead[C]{Franz P\"oschel \\ Tutorium: Mi: 16-18, \"UG 4} 
+\fancyhead[R]{ Florian Gehring  \\
+Rodi Ak} 
+\renewcommand{\headrulewidth}{0.4pt} 
+\renewcommand{\footrulewidth}{0.4pt}
+\parindent 0pt 
+ 
+\usepackage{pgf}
+\usetikzlibrary{matrix,positioning}
+
+\author{Florian Gehring}
+\title{Dokumentation Programmieraufgabe 1}
+\begin{document}
+\section{Vorwort}
+Dies ist die Abgabe von Rodi Ak und Florian Gehring zur Programmieraufgabe 2 zur Vorlesung Stochastik im Sommersemester 2017. \\
+\section{Veränderung von Mergelists}
+\subsection{Aufgabenstellung}
+Hier sollte man die vorgegebene Methode merglists so verändern, dass Sie nicht mehr auf Vektoren arbeitet, sondern auf Listen welche die zwei Felder data und number haben. \\
+Der Rückgabewert soll dann auch genau so eine Liste sein.\\
+In data ist in beiden Listen ein Vektor gespeichert, die im Sinne des Mergesort Algorithmus zusammenfügt werden sollen und dieser neu entstandene Vektor wird in der Rückgabeliste unter dem namen data zurückgegeben, \\
+In number ist in beiden Eingabelisten eine Zahl gespeichert. In der Rückgabeliste ist unter data die Summer der beiden Zahlen, plus die Anzahl an benötigten Vergleichen zum mergen der Vektoren gespeichert.\\
+\subsection{Implementierung}
+An der bestehenden Funktion musste relativ wenig abgeändert werden.\\
+Eigentlich habe ich nur alle Vorkommnisse der Parameter a und b durch a\$data und b\$data ersetzt, r zu einer Liste mit den entsprechenden Feldern gemacht und dann ebenfalls die Vorkommnisse von r mit r\$data ersetzt. \\
+Damit hat das mergen der zwei Eingabelisten schon funktioniert. \\
+Zusätzlich habe ich die Funktion noch so erweitert, dass sie in r\$number zuerst a\$number + b\$number speichert und nachdem die While-Schleife terminiert hat den Wert der der Variable j um eins dekrementiert und dann zu r\$number dazuaddiert. j -1 ist nämlich die Anzahl an Vergleichen die benötigt wude.
+\section{Veränderung von Mergesort}
+\subsection{Aufgabenstellung}
+In dieser Aufgabe war gefordert, dass man die schon vorgegebene Funktion mergesort in einer Weise verändert, dass Sie immer noch einen Vektor als Argument entgegennimmt, aber nun eine Liste zurückgibt, die die gleiche Struktur hat wie die, auf denen mergelists nun Arbeitet. \\
+Ziel ist es, festzustellen wie viele Vergleiche benötigt wurden um den gegebenen Vektor zu sortieren. \\
+\subsection{Implementierung}
+Die implementierung war hier sehr simpel.\\
+Da mergesort seine Listen nicht mehr spaltet, nachdem er die tiefste Rekursionsstufe erreicht hat, sondern sie dann nur noch zusammenfügt, musste man nur das return-Statement der Abbruchbedingung verändern. \\
+Mergesort bricht die Rekurion ab, wenn die Liste nur noch 1 (oder 0) lang ist, da sie dann (trivialerweise) sortiert ist, weil keine Störung der Reihenfolge bei nur einem Element vorliegen kann. Um diese Liste zu sortieren wurde kein Vergleich benötigt, es wurde ja nur gespalten. \\
+Also lässt man mergesort hier eine Liste in dem \$data der als Funktionargument übergebene Vektor ist  und in dem \$number  gleich 0 zurückgeben.\\
+Diese Rückgabeliste wird nur noch von dem modifizierten mergelists behandelt.
+\section{Implementierung der Monte-Carlo Simulation}
+\subsection{Aufgabenstellung}
+Hier soll man eine Funktion implementieren die eine Monte-Carlo Simulation durchführt deren Ziel es ist den Erwartungswert $E(T)$ und die Varianz $Var(T)$ der Zufallsvariable T := \#BenötigteVergleicheZumSortieren. Die Länge der Liste kann über den Funktionsparameter n eingestellt werden.\\
+Außerdem soll die Verteilungsfunktion der Zufallsvariable $T^* = \frac{T - E(T)}{\sigma(T)} = \frac{T - E(T)}{\sqrt[]{Var(T)}}$ ausgegeben werden.\\
+Zurückgegeben werden soll eine Liste über die jeweils mit  \$e, \$v und \$F  auf Erwartungswert, Varianz und Verteilungsfunktion zugegriffen werden kann.
+\subsection{Implementierung}
+\subsubsection{Quellcode}
+\begin{lstlisting}
+MC <- function(n, B=10000){
+experiments <- replicate(B,mergesort(sample(n))$number)
+erwartungswert <- mean(experiments)
+varianz <- var(experiments)
+FtStern <- function(a) {ecdf((experiments - erwartungswert)/sqrt(varianz))(a)}
+return(list(F=FtStern, 
+v=varianz, 
+e=erwartungswert))
+}
+MC <- cmpfun(MC)
+\end{lstlisting}
+\subsubsection{Erklärung}
+Funktionsargumente: n, welches die Länge der zu sortierenden Vektoren festlegt und B (Standardwert: 10000) welches die Anzahl an Versuchswiederholungen festlegt und so die genauigkeit der MC-Simulation beeinflusst. \\
+Mit sample(n) kann man zufällige Permutationen aus $S_n$ erzeugen. Dies wird als Argument an mergesort Übergeben, welches sich innerhalb von replicate befindet. \\
+replicate wiederholt so B-mal das sortieren eines zufälligen Vektors. Mit \$number nach mergesort zieht man die Anzahl an in Mergesort gebrauchten Vergleichen aus der Liste und speichert sie in dem von replicate erzeugten Vektor.\\
+Das Ergebnis von replicate speichert man in experiments.\\
+Daraus kann man mit der Funktion mean(x), die den Durchschnitt eines Vektors berechnet, den Erwartungswert E(T) annähern. (Vgl Wichtige Definitionen und Sätze, Satz 2.31). \\
+R stellt mit var eine Funktion zur Verfügung die automatisch die Varianz von Werten aus einem gegebenen Vektor berechnet, diese wird benutzt um die Varianz in der Variablen varianz zu speichern.\\
+Die Verteilungsfunktion von $T^*$ wird mit hilfe der in R definierten Funktion ecdf erstellt. ecdf nimmt einen Vektor von Beobachtungen und erstellt daraus eine Verteilungsfunktion die für eine Zahl t die Anzahl der Beobachtungen kleiner gleich t geteilt durch die Gesamtzahl der Experimente zurückgibt.
+\subsection{Benutzung der MC Funktion}
+Man muss die Länge der zu sortierenden Listen über ein Funktionsargumente spezifizieren.\\
+Über den optionalen Parameter B=? kann man die Anzahl an Versuchswiederholungen festlegen.\\
+Die Funktion gibt eine Liste zurück.\\
+Elemente der Liste:\\
+\begin{tabular}{l|l}
+Zugriff: & Beschreibung \\ \hline
+MC(n)\$F &	Die Verteilungsfunktion von $T^* $ \\
+MC(n)\$e & Der Erwartungswert von T \\
+MC(n)\$v & Die Varianz von T 
+
+\end{tabular}
+\section{Simulationen}
+\begin{lstlisting}
+> system.time(mc <- lapply(3:100, MC))
+> for(i in 1:98)
++ {
++ eOfN[i] <- mc[[i]]$e }
+> for(i in 1:98)
++ {
++ vOfN[i] <- mc[[i]]$v }
+
+
+\end{lstlisting}
+\subsection{Plotten von $ \frac{e(n)}{n\cdot \log(n)}$}
+\subsubsection{Eingabe in R}
+\begin{lstlisting}
+> ewPlot <- rep(0, 100)
+> for(i in 3:100){
++ ewPlot[i] <- eOfN[i - 2] / (i * log(i)) }
+> plot(3:100, ewPlot[3:100], xlab='n', ylab='e(n)/(n*log(n))')
+\end{lstlisting}
+\subsubsection{Plot}
+\includegraphics[width=1\textwidth]{plot_en.png} 
+\subsection{Plotten von $\frac{v(n)}{n}$}
+\subsubsection{Eingabe in R}
+\begin{lstlisting}
+ > plot(3:100, vOfN/3:100, xlab='n', ylab='v(n)/n', main='Plot 2')
+\end{lstlisting}
+\subsubsection{Plot}
+\includegraphics[width=1\textwidth]{plot_vn.png} 
+\subsection{Auffälligkeiten}
+Bei Plot 2 sieht man sehr deutlich, dass die Varianz immer wenn n ungefähr einer Zweierpotenz entspricht drastisch zuückgeht. \\
+Bei Plot 1 kann man ein ähnliches Phänomen erkennen, und zwar dass der Erwartungswert bei Zweierpotenzen im Verhältniss zu umliegenden Werten etwas geringer ausfällt als man erwarten könnte, allerdings ist dies lang nicht so deutlich zu sehen wie bei der Varianz.
+\subsection{Plotten der Verteilungsfunktionen}
+\subsubsection{Eingabe in R}
+\begin{lstlisting}
+> F10 <- MC(10)$F(-3:3)
+> F100 <- MC(100)$F(-3:3)
+> F500Raw <- MC(500)$F
+> plot(-3:3, F10, pch=1, col=rainbow(n)[1], main='Plot 3: Fn', xlab='x', ylab='F_n(x)')
+> points(-3:3, F500, pch=3, col=rainbow(n)[3])
+> points(-3:3, F100, pch=2, col=rainbow(n)[2])
+> points(-3:3, F500, pch='x', col=rainbow(3)[3])
+\end{lstlisting}
+\subsubsection{Plot}
+Legende: \\
+Rote Kreis: $ F_10$ \\
+Hellblaue Dreiecke: $F_100$ \\
+dunkelblaue x:$ F500$\\
+\includegraphics[width=1\textwidth]{plot_Fn.png} 
+\end{document}

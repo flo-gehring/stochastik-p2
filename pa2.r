@@ -23,17 +23,29 @@ else if(bi<=bl) r$data[j:(al+bl)] <- b$data[bi:bl]
 return(r)
 }
 mergelists <- cmpfun(mergelists)
+
+
+
 mergesort <- function(x) {
 l <- length(x)
 if(l>1) {
 p <- ceiling(l/2)
 a <- mergesort(x[1:p])
 b <- mergesort(x[(p+1):l])
-return(mergelists(list( data=a, number=0),list(data=b, number=0)))
+return(mergelists(a,b))
 }
-return(x)
+return(list(data=x, number=0))
 }
-
 mergesort <- cmpfun(mergesort)
-MC <- function(n, B=10000) ...
+
+
+MC <- function(n, B=10000){
+experiments <- replicate(B,mergesort(sample(n))$number)
+erwartungswert <- mean(experiments)
+varianz <- var(experiments)
+FtStern <- function(a) {ecdf((experiments - erwartungswert)/sqrt(varianz))(a)}
+return(list(F=FtStern, 
+v=varianz, 
+e=erwartungswert))
+}
 MC <- cmpfun(MC)
